@@ -10,7 +10,7 @@ const EditQualityPage = () => {
   const handeleSubmit = async (data) => {
     try {
       await axios
-        .put(qualityEndPoint + "vwvw", data)
+        .put(qualityEndPoint, data)
         .then((res) => console.log(res.data.content));
     } catch (error) {
       const expectedErrors =
@@ -27,11 +27,14 @@ const EditQualityPage = () => {
     setQuality(data.content);
   }, []);
   // console.log(quality);
-  if (!quality) return "Загрузка данных....";
   return (
     <>
       <h1>Edit Quality Page</h1>{" "}
-      <EditForm data={quality} onSubmit={handeleSubmit} />
+      {quality ? (
+        <EditForm data={quality} onSubmit={handeleSubmit} />
+      ) : (
+        "Загрузка данных...."
+      )}
     </>
   );
 };
